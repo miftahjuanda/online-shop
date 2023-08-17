@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miftah.onlineshop.R
@@ -58,6 +59,8 @@ class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
 
     override fun onCLick(v: View, data: HomeListModel) {
         Toast.makeText(context, "Clickk item: " + data.title, Toast.LENGTH_SHORT).show()
+
+        findNavController().navigate(R.id.action_navigation_home_to_detailItemActivity)
     }
 
 }

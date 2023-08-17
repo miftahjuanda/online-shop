@@ -23,6 +23,10 @@ class ListItemAdapter(private val homeList : ArrayList<HomeListModel>, private  
         val currentItem = homeList[position]
         holder.titleHome.text = currentItem.title
         holder.subTitleHome.text = currentItem.price
+
+        holder.itemView.setOnClickListener {
+            itemClickAdapterCallback.onCLick(holder.itemView, homeList[position])
+        }
     }
 
     class HomeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

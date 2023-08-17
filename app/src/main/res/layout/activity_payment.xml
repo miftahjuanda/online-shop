@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightGray"
+    android:orientation="vertical"
+    tools:context=".scenes.payment.PaymentActivity">
+
+    <RelativeLayout
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <ImageButton
+            android:id="@+id/back_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back_000"
+            app:tint="@android:color/darker_gray" />
+
+        <TextView
+            style="@style/TextView.PoppinsNormal22sp020202"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/back_iv"
+            android:text="Payment" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            style="@style/TextView.PoppinsNormal14sp020202"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Item Ordered" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/iv_sample_product" />
+
+            <TextView
+                android:id="@+id/total_items_tv"
+                style="@style/TextView.PoppinsNormal13sp8D92A3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="14 items"
+                android:textColor="@color/grayTv" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_toStartOf="@id/total_items_tv"
+                android:layout_toEndOf="@id/item_image"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_items"
+                    style="@style/TextView.PoppinsNormal16sp020202"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:text="Cherry Healthy" />
+
+                <TextView
+                    android:id="@+id/harga_asli_tv"
+                    style="@style/TextView.PoppinsNormal13sp8D92A3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="IDR 289.000" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/total_items_tv"
+            android:layout_toEndOf="@id/item_image"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextView.PoppinsNormal14sp020202"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Total Price"
+                android:textColor="@color/grayTv" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/harga_items"
+                style="@style/TextView.PoppinsNormal13sp8D92A3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IDR 390.803.000"
+                android:textColor="@color/green" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            style="@style/TextView.PoppinsNormal14sp020202"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Deliver to" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/total_items_tv"
+            android:layout_toEndOf="@id/item_image"
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/TextView.PoppinsNormal14sp020202"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Nama"
+                android:textColor="@color/grayTv" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/nama_tv"
+                style="@style/TextView.PoppinsNormal13sp8D92A3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama sayaa"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/total_items_tv"
+            android:layout_toEndOf="@id/item_image"
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/TextView.PoppinsNormal14sp020202"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Phone number"
+                android:textColor="@color/grayTv" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+            <TextView
+                android:id="@+id/phone_number_tv"
+                style="@style/TextView.PoppinsNormal13sp8D92A3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0822 0819 9688"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/total_items_tv"
+            android:layout_toEndOf="@id/item_image"
+            android:layout_marginBottom="6dp"
+            android:orientation="vertical">
+            <TextView
+                style="@style/TextView.PoppinsNormal14sp020202"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Address: "
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/grayTv" />
+            <TextView
+                android:id="@+id/address_tv"
+                style="@style/TextView.PoppinsNormal13sp8D92A3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seledri, telur, blueberry, madu. Seledri, telur, blueberry, madu. Seledri, telur, blueberry, madu."
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/checkout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@drawable/shape_rectangle_8_ffc700"
+        android:text="Checkout Now"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"/>
+
+</LinearLayout>

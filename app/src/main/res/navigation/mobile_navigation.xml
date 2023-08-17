@@ -15,11 +15,23 @@
         android:id="@+id/navigation_home"
         android:name="com.miftah.onlineshop.scenes.listItems.ListItemsFragment"
         android:label="@string/order"
-        tools:layout="@layout/fragment_list_items" />
+        tools:layout="@layout/fragment_list_items" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailItemActivity"
+            app:destination="@id/detailItemActivity"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.miftah.onlineshop.scenes.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
+    <activity
+        android:id="@+id/detailItemActivity"
+        android:name="com.miftah.onlineshop.scenes.detailItems.DetailItemActivity"
+        android:label="activity_detail_item"
+        tools:layout="@layout/activity_detail_item" />
 </navigation>
