@@ -77,11 +77,10 @@
             android:layout_width="match_parent"
             android:layout_marginTop="50dp"
             android:background="@color/white"
-            tools:listitem="@layout/item_list_vertical"
+            tools:listitem="@layout/order_list_vertical"
             app:layout_constraintTop_toBottomOf="@id/spacer_cv"
             android:layout_height="match_parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </LinearLayout>

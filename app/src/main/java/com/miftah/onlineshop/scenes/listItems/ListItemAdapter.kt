@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miftah.onlineshop.R
 import com.miftah.onlineshop.model.HomeListModel
 
-class ListItemAdapter(private val homeList : ArrayList<HomeListModel>, private  val itemClickAdapterCallback: ItemAdapterCallback,) : RecyclerView.Adapter<ListItemAdapter.HomeViewHolder>() {
+class ListItemAdapter(private val homeList : ArrayList<HomeListModel>, private  val itemClickAdapterCallback: ItemAdapterCallback) : RecyclerView.Adapter<ListItemAdapter.HomeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_list_vertical, parent, false)
