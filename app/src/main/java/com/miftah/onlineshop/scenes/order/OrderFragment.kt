@@ -30,7 +30,6 @@ class OrderFragment : Fragment(), OrderItemAdapter.ItemAdapterCallback {
         binding = FragmentOrderBinding.inflate(inflater)
 
         return binding.root
-//        inflater.inflate(R.layout.fragment_order, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
