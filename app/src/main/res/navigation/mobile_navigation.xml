@@ -33,5 +33,9 @@
         android:id="@+id/detailItemActivity"
         android:name="com.miftah.onlineshop.scenes.detailItems.DetailItemActivity"
         android:label="activity_detail_item"
-        tools:layout="@layout/activity_detail_item" />
+        tools:layout="@layout/activity_detail_item" >
+        <argument
+            android:name="dataDetail"
+            app:argType="com.miftah.onlineshop.scenes.listItems.Model.DatumProduct" />
+    </activity>
 </navigation>

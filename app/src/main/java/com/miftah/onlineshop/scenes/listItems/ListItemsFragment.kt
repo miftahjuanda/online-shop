@@ -6,29 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miftah.onlineshop.R
-import com.miftah.onlineshop.model.HomeListModel
+import com.miftah.onlineshop.databinding.FragmentListItemsBinding
+import com.miftah.onlineshop.scenes.listItems.Model.DatumProduct
 
 class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
 
-    private var listItem: ArrayList<HomeListModel> = ArrayList()
+    private var listItem: ArrayList<DatumProduct> = ArrayList()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ListItemAdapter
+
+    private lateinit var binding: FragmentListItemsBinding
+
+    private lateinit var viewModel: ListItemViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_list_items, container, false)
+        binding = FragmentListItemsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initDataDummy()
+
+        viewModel = ViewModelProvider(requireActivity())[ListItemViewModel::class.java]
+
+        viewModel.getListProduct()
 
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.home_list_rv)
@@ -36,31 +47,24 @@ class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
         recyclerView.setHasFixedSize(true)
         adapter = ListItemAdapter(listItem, this)
         recyclerView.adapter = adapter
+
+        setDataList()
     }
 
-    private fun initDataDummy() {
-        listItem = ArrayList()
-        listItem.add(HomeListModel("Title 1", "12.000"))
-        listItem.add(HomeListModel("Title 2", "15.000"))
-        listItem.add(HomeListModel("Title 3", "42.000"))
-        listItem.add(HomeListModel("Title 4", "22.000"))
-        listItem.add(HomeListModel("Title 5", "122.000"))
-        listItem.add(HomeListModel("Title 6", "12.000"))
-        listItem.add(HomeListModel("Title 7", "15.000"))
-        listItem.add(HomeListModel("Title 8", "42.000"))
-        listItem.add(HomeListModel("Title 9", "22.000"))
-        listItem.add(HomeListModel("Title 10", "122.000"))
-        listItem.add(HomeListModel("Title 11", "12.000"))
-        listItem.add(HomeListModel("Title 12", "15.000"))
-        listItem.add(HomeListModel("Title 13", "42.000"))
-        listItem.add(HomeListModel("Title 14", "22.000"))
-        listItem.add(HomeListModel("Title 15", "122.000"))
+    private fun setDataList() {
+        viewModel.listItems.observe(requireActivity(), Observer {
+            it.data.forEach { it1 ->
+                listItem.add(it1)
+            }
+            adapter.notifyDataSetChanged()
+        } )
     }
 
-    override fun onCLick(v: View, data: HomeListModel) {
-        Toast.makeText(context, "Clickk item: " + data.title, Toast.LENGTH_SHORT).show()
+    override fun onCLick(v: View, data: DatumProduct) {
+        Toast.makeText(context, "Clickk item: " + data.productName, Toast.LENGTH_SHORT).show()
 
-        findNavController().navigate(R.id.action_navigation_home_to_detailItemActivity)
+        val direction = ListItemsFragmentDirections.actionNavigationHomeToDetailItemActivity(data)
+        findNavController().navigate(direction)
     }
 
 }

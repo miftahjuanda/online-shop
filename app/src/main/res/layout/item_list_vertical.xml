@@ -14,6 +14,7 @@
         android:layout_height="60dp"
         android:background="@drawable/shape_rectangle_8_fff"
         android:scaleType="centerCrop"
+        android:clipToOutline="true"
         android:src="@drawable/iv_sample_product"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
