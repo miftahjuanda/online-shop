@@ -24,6 +24,7 @@
             android:layout_marginTop="20dp"
             android:src="@drawable/pic"/>
         <TextView
+            android:id="@+id/profile_nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Kamu"
@@ -31,12 +32,12 @@
             android:layout_marginTop="18dp"
             android:textStyle="bold"/>
         <TextView
+            android:id="@+id/profile_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+628.xxxxxx"
             style="@style/TextView.PoppinsNormal14sp8D92A3"
             android:layout_marginTop="6dp"/>
-
     </LinearLayout>
 
     <LinearLayout

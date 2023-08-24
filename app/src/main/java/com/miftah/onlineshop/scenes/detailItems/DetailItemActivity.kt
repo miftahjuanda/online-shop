@@ -9,7 +9,10 @@ import androidx.navigation.navArgs
 import androidx.viewpager.widget.ViewPager
 import com.miftah.onlineshop.R
 import com.miftah.onlineshop.databinding.ActivityDetailItemBinding
+import com.miftah.onlineshop.model.PaymentModel
+import com.miftah.onlineshop.scenes.editProfile.EditProfileActivity
 import com.miftah.onlineshop.scenes.payment.PaymentActivity
+import com.miftah.onlineshop.utilities.SharedPreferenceManager
 import com.miftah.onlineshop.utilities.convertRupiah
 import me.relex.circleindicator.CircleIndicator
 import java.text.NumberFormat
@@ -73,9 +76,32 @@ class DetailItemActivity : AppCompatActivity() {
         }
 
         binding.orderNowBtn.setOnClickListener {
-            val intent = Intent(this, PaymentActivity::class.java)
-            startActivity(intent)
+            val user = SharedPreferenceManager(this).getUser()
+
+            if (user != null) {
+                moveToPayment()
+            } else {
+                openEditData()
+            }
+
         }
+    }
+
+    private fun openEditData() {
+        val intent = Intent(this, EditProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun moveToPayment() {
+        val dataOrder = PaymentModel(detailData.dataDetail.productName,
+            detailData.dataDetail.productImages.first().imagePath,
+            detailData.dataDetail.productPrice.toDouble(),
+            detailData.dataDetail.productUnit,
+            binding.totalItemsText.text.toString())
+
+        val intent = Intent(this, PaymentActivity::class.java)
+        intent.putExtra("paymentModel", dataOrder)
+        startActivity(intent)
     }
 
     private fun setImagePager() {

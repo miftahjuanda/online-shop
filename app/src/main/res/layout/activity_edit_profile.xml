@@ -54,6 +54,7 @@
             android:text="Full name"
             style="@style/TextView.PoppinsNormal16sp020202"/>
         <EditText
+            android:id="@+id/edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -66,6 +67,7 @@
             android:layout_marginTop="10dp"
             style="@style/TextView.PoppinsNormal16sp020202"/>
         <EditText
+            android:id="@+id/edit_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -74,14 +76,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Address"
+            android:text="Complete address"
             android:layout_marginTop="10dp"
             style="@style/TextView.PoppinsNormal16sp020202"/>
         <EditText
+            android:id="@+id/edit_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
             android:hint="Type your address"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postal code"
+            android:layout_marginTop="10dp"
+            style="@style/TextView.PoppinsNormal16sp020202"/>
+        <EditText
+            android:id="@+id/edit_postal_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Type your postal code"/>
     </LinearLayout>
 
     <Button
