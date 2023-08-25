@@ -93,7 +93,8 @@ class DetailItemActivity : AppCompatActivity() {
     }
 
     private fun moveToPayment() {
-        val dataOrder = PaymentModel(detailData.dataDetail.productName,
+        val dataOrder = PaymentModel(detailData.dataDetail.productId,
+            detailData.dataDetail.productName,
             detailData.dataDetail.productImages.first().imagePath,
             detailData.dataDetail.productPrice.toDouble(),
             detailData.dataDetail.productUnit,

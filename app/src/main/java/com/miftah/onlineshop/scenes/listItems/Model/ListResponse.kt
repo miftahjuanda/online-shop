@@ -15,7 +15,7 @@ data class DatumProduct(
     @SerializedName("umkm_name")
     val umkmName: String,
     @SerializedName("product_id")
-    val productId: Long,
+    val productId: Int,
     @SerializedName("product_name")
     val productName: String,
     @SerializedName("product_description")

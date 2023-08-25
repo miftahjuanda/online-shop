@@ -4,16 +4,18 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.miftah.onlineshop.R
 import com.miftah.onlineshop.databinding.ActivityPaymentBinding
+import com.miftah.onlineshop.model.OrderDetails
+import com.miftah.onlineshop.model.OrderModel
 import com.miftah.onlineshop.model.PaymentModel
-import com.miftah.onlineshop.scenes.listItems.Model.DatumProduct
+import com.miftah.onlineshop.scenes.listItems.ListItemViewModel
 import com.miftah.onlineshop.utilities.SharedPreferenceManager
 import com.miftah.onlineshop.utilities.convertRupiah
 import java.net.URLEncoder
@@ -23,6 +25,7 @@ class PaymentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPaymentBinding
     private var isView: Boolean = false
 
+    private lateinit var viewModel: PaymentViewModel
     lateinit var paymentModel: PaymentModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +33,13 @@ class PaymentActivity : AppCompatActivity() {
         binding = ActivityPaymentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ViewModelProvider(this)[PaymentViewModel::class.java]
         paymentModel = intent.extras?.getParcelable("paymentModel")!!
         isView = intent.getBooleanExtra("isViewPayment", isView)
 
         eventBtn()
         bindData()
+        observeValue()
     }
 
     private fun bindData() {
@@ -74,9 +79,27 @@ class PaymentActivity : AppCompatActivity() {
             if (isView) {
                 finish()
             } else {
-                openWhatsapp()
+                orderProcess()
+//                openWhatsapp()
             }
         }
+    }
+
+    private fun observeValue() {
+        viewModel.orderResponse.observe(this, Observer {
+            print("result order: $it")
+            finish()
+        })
+    }
+
+    private fun orderProcess() {
+        val user = SharedPreferenceManager(this).getUser()
+        val orderDetails: ArrayList<OrderDetails> = arrayListOf()
+
+        orderDetails.add(OrderDetails(paymentModel.id, paymentModel.item.toInt()))
+        val paymentModel = OrderModel(user?.nama, user?.phone, user?.address, user?.postalCode.toString(), orderDetails)
+
+        viewModel.postOrdering(paymentModel)
     }
 
     private fun openWhatsapp() {

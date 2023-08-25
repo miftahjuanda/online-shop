@@ -11,4 +11,9 @@ object NetworkManager {
             .build()
             .create(UmkmApi::class.java)
     }
+
+    val postRetrofit = Retrofit.Builder()
+    .baseUrl("https://umkm2m.com/api/")
+    .addConverterFactory(GsonConverterFactory.create())
+    .build()
 }
