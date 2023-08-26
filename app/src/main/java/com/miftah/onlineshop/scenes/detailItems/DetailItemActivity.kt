@@ -23,7 +23,6 @@ class DetailItemActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var imageSliderAdapter: ImageSliderAdapter
-    private lateinit var imageList: List<Int>
     private lateinit var indicator: CircleIndicator
     private lateinit var binding: ActivityDetailItemBinding
 
@@ -106,14 +105,8 @@ class DetailItemActivity : AppCompatActivity() {
     }
 
     private fun setImagePager() {
-        imageList = ArrayList<Int>()
-        imageList = imageList + R.drawable.iv_sample_product
-        imageList = imageList + R.drawable.ic_sample_product2
-        imageList = imageList + R.drawable.iv_sample_product
-        imageList = imageList + R.drawable.iv_sample_product
-
         viewPager = binding.viewpager //findViewById(R.id.viewpager)
-        imageSliderAdapter = ImageSliderAdapter(this, imageList)
+        imageSliderAdapter = ImageSliderAdapter(this, detailData.dataDetail.productImages)
         viewPager.adapter = imageSliderAdapter
         indicator = binding.indicator //findViewById(R.id.indicator)
         indicator.setViewPager(viewPager)

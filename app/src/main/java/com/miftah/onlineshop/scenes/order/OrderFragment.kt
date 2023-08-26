@@ -7,20 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miftah.onlineshop.R
 import com.miftah.onlineshop.databinding.FragmentOrderBinding
+import com.miftah.onlineshop.model.DatumOrders
 import com.miftah.onlineshop.model.OrderListModel
+import com.miftah.onlineshop.model.PaymentModel
+import com.miftah.onlineshop.model.UserOrderModel
 import com.miftah.onlineshop.scenes.payment.PaymentActivity
+import com.miftah.onlineshop.utilities.SharedPreferenceManager
 
 class OrderFragment : Fragment(), OrderItemAdapter.ItemAdapterCallback {
 
-    private var listItem: ArrayList<OrderListModel> = ArrayList()
+    private var listOrder: ArrayList<DatumOrders> = ArrayList()
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: OrderItemAdapter
-
+    private lateinit var viewModel: OrderViewModel
     private lateinit var binding: FragmentOrderBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,33 +34,56 @@ class OrderFragment : Fragment(), OrderItemAdapter.ItemAdapterCallback {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOrderBinding.inflate(inflater)
-
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val user = SharedPreferenceManager(requireContext()).getUser()
+        viewModel.getListOrder(UserOrderModel(user?.nama ?: "", user?.phone ?: ""))
+
+        observeData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initDataDummy()
+
+        viewModel = ViewModelProvider(requireActivity())[OrderViewModel::class.java]
+        listOrder = arrayListOf()
 
         val layoutManager = LinearLayoutManager(context)
         recyclerView = binding.orderListRv
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        adapter = OrderItemAdapter(listItem, this)
+        adapter = OrderItemAdapter(listOrder, this)
         recyclerView.adapter = adapter
+
     }
 
-    private fun initDataDummy() {
-        listItem = ArrayList()
-        listItem.add(OrderListModel("Order 1", "IDR 2.000.000", "In Packaging", 14))
-        listItem.add(OrderListModel("Order 2", "IDR 250.000", "In delivery", 2))
-        listItem.add(OrderListModel("Order 3", "IDR 400.000", "Cancelled", 4))
-        listItem.add(OrderListModel("Order 4", "IDR 1.000.000", "Done", 10))
+    private fun observeData() {
+        viewModel.orderList.observe( requireActivity(), Observer{
+            listOrder.clear()
+
+            it.data.forEach { it1 ->
+                listOrder.add(it1)
+            }
+
+            adapter.notifyDataSetChanged()
+        })
     }
 
-    override fun onCLick(v: View, data: OrderListModel) {
-        Toast.makeText(context, "Order: "+ data.title, Toast.LENGTH_SHORT).show()
-        val intent = Intent (context, PaymentActivity::class.java)
+    override fun onCLick(v: View, data: DatumOrders) {
+        val dataOrder = PaymentModel(data.orderID,
+            data.productName,
+            data.productImage,
+            data.basePrice.toDouble(),
+            data.productUnit,
+            data.itemAmount.toString(),
+            data.orderCode,
+            data.orderStatus)
+
+        val intent = Intent(requireContext(), PaymentActivity::class.java)
+        intent.putExtra("paymentModel", dataOrder)
         intent.putExtra("isViewPayment", true)
         startActivity(intent)
     }

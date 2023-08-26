@@ -24,6 +24,8 @@
         style="@style/TextView.PoppinsNormal16sp020202"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:maxWidth="150dp"
         android:layout_marginStart="12dp"
         android:text="Title List"
         app:layout_constraintStart_toEndOf="@id/order_list_img"
@@ -35,16 +37,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:maxWidth="150dp"
         android:layout_marginTop="4dp"
-        android:text="14 item • IDR 6.000.000"
+        android:text="14 item • IDR 6.000.000 IDR 6.000.000 6.000.000 6.000.000"
         app:layout_constraintStart_toEndOf="@id/order_list_img"
-        app:layout_constraintTop_toBottomOf="@id/order_title_tv" />
+        app:layout_constraintTop_toBottomOf="@id/order_title_tv"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/order_status_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="In progress"
+        android:textAlignment="center"
+        android:maxWidth="130dp"
+        app:flow_verticalAlign="center"
+        android:text="In progress, In progressIn progress"
         android:textColor="@color/yellowLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

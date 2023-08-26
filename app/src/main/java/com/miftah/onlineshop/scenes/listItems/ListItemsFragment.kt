@@ -38,8 +38,8 @@ class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(requireActivity())[ListItemViewModel::class.java]
-
         viewModel.getListProduct()
+        listItem = arrayListOf()
 
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.home_list_rv)
@@ -53,6 +53,8 @@ class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
 
     private fun setDataList() {
         viewModel.listItems.observe(requireActivity(), Observer {
+            listItem.clear()
+
             it.data.forEach { it1 ->
                 listItem.add(it1)
             }
@@ -61,8 +63,6 @@ class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
     }
 
     override fun onCLick(v: View, data: DatumProduct) {
-        Toast.makeText(context, "Clickk item: " + data.productName, Toast.LENGTH_SHORT).show()
-
         val direction = ListItemsFragmentDirections.actionNavigationHomeToDetailItemActivity(data)
         findNavController().navigate(direction)
     }
