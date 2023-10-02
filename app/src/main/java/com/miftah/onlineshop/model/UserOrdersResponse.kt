@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class UserOrdersResponse (
     val status: String,
     val message: String,
-    val error: JsonElement? = null,
     val data: List<DatumOrders>
 )
 

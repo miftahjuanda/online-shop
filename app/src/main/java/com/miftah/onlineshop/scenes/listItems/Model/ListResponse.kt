@@ -12,8 +12,18 @@ data class ListResponse(
 
 @Parcelize
 data class DatumProduct(
+    @SerializedName("umkm_id")
+    val umkmid: Int,
     @SerializedName("umkm_name")
     val umkmName: String,
+    @SerializedName("umkm_contact")
+    val umkmContact: String,
+    @SerializedName("umkm_account_number")
+    val umkmAccountNumber: String,
+    @SerializedName("umkm_account_bank")
+    val umkmAccountBank: String,
+    @SerializedName("umkm_account_bank_nama")
+    val umkmAccountBankName: String,
     @SerializedName("product_id")
     val productId: Int,
     @SerializedName("product_name")
@@ -30,10 +40,10 @@ data class DatumProduct(
     val productCategory: String,
     @SerializedName("product_images")
     val productImages: List<ProductImage>,
-): Parcelable
+) : Parcelable
 
 @Parcelize
 data class ProductImage(
     @SerializedName("image_path")
     val imagePath: String,
-): Parcelable
+) : Parcelable

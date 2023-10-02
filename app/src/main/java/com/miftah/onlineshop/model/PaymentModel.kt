@@ -12,6 +12,11 @@ data class PaymentModel(
     var price: Double = 0.0,
     var unit: String = "",
     var item: String = "",
+    var umkmId: Int = 0,
+    var waUmkm: String = "",
+    var umkmBank: String = "",
+    var umkmBankNumber: String = "",
+    var umkmBankName: String = "",
     var orderCode: String = "",
     var orderStatus: String = ""
 ): Parcelable
@@ -21,6 +26,7 @@ data class OrderModel (
     @SerializedName("customer_phone"   ) var customerPhone   : String?                 = null,
     @SerializedName("shipping_address" ) var shippingAddress : String?                 = null,
     @SerializedName("postal_code"      ) var postalCode      : String?                 = null,
+    @SerializedName("umkm_id"          ) var umkmId          : Int?                    = null,
     @SerializedName("order_details"    ) var orderDetails    : ArrayList<OrderDetails> = arrayListOf()
 
 )

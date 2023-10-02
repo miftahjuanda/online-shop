@@ -13,7 +13,9 @@ class OrderViewModel: ViewModel() {
 
     fun getListOrder(user: UserOrderModel) {
         viewModelScope.launch {
-            orderList.value = NetworkManager.retrofit.getListOrdering(user)
+            NetworkManager.retrofit.getListOrdering(user).let { result ->
+                orderList.value = result
+            }
         }
     }
 }

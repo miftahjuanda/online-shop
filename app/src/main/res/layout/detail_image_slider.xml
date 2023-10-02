@@ -16,8 +16,7 @@
             android:id="@+id/images_slider_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_sample_product2"
-            android:scaleType="fitXY" />
+            android:src="@drawable/ic_sample_product2" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

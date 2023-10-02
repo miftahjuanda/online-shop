@@ -66,7 +66,6 @@ class DetailItemActivity : AppCompatActivity() {
                 binding.detailPrice.text = "${(convertRupiah((price * totalOrder).toDouble()))}"
             }
         }
-
     }
 
     private fun eventButton() {
@@ -82,7 +81,6 @@ class DetailItemActivity : AppCompatActivity() {
             } else {
                 openEditData()
             }
-
         }
     }
 
@@ -97,7 +95,12 @@ class DetailItemActivity : AppCompatActivity() {
             detailData.dataDetail.productImages.first().imagePath,
             detailData.dataDetail.productPrice.toDouble(),
             detailData.dataDetail.productUnit,
-            binding.totalItemsText.text.toString())
+            binding.totalItemsText.text.toString(),
+            detailData.dataDetail.umkmid,
+            detailData.dataDetail.umkmContact,
+            detailData.dataDetail.umkmAccountBank,
+            detailData.dataDetail.umkmAccountNumber,
+            detailData.dataDetail.umkmAccountBankName)
 
         val intent = Intent(this, PaymentActivity::class.java)
         intent.putExtra("paymentModel", dataOrder)

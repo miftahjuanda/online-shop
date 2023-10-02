@@ -18,6 +18,7 @@ import com.miftah.onlineshop.model.DatumOrders
 import com.miftah.onlineshop.model.OrderListModel
 import com.miftah.onlineshop.model.PaymentModel
 import com.miftah.onlineshop.model.UserOrderModel
+import com.miftah.onlineshop.scenes.editProfile.EditProfileActivity
 import com.miftah.onlineshop.scenes.payment.PaymentActivity
 import com.miftah.onlineshop.utilities.SharedPreferenceManager
 
@@ -39,10 +40,17 @@ class OrderFragment : Fragment(), OrderItemAdapter.ItemAdapterCallback {
 
     override fun onResume() {
         super.onResume()
-        val user = SharedPreferenceManager(requireContext()).getUser()
-        viewModel.getListOrder(UserOrderModel(user?.nama ?: "", user?.phone ?: ""))
+        viewModel = ViewModelProvider(requireActivity())[OrderViewModel::class.java]
+        listOrder = arrayListOf()
 
-        observeData()
+        val getUser = SharedPreferenceManager(requireContext()).getUser()
+        getUser?.let { user ->
+            viewModel.getListOrder(UserOrderModel(user.nama, user.phone))
+            observeData()
+        } ?: kotlin.run {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,29 +66,47 @@ class OrderFragment : Fragment(), OrderItemAdapter.ItemAdapterCallback {
         adapter = OrderItemAdapter(listOrder, this)
         recyclerView.adapter = adapter
 
+
+        val getUser = SharedPreferenceManager(requireContext()).getUser()
+        getUser?.let { user ->
+            viewModel.getListOrder(UserOrderModel(user.nama, user.phone))
+            observeData()
+        } ?: kotlin.run {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun observeData() {
-        viewModel.orderList.observe( requireActivity(), Observer{
-            listOrder.clear()
+        viewModel.orderList.observe(requireActivity(), Observer {
 
-            it.data.forEach { it1 ->
-                listOrder.add(it1)
+            if (it.data != null) {
+                listOrder.clear()
+                it.data.forEach { it1 ->
+                    listOrder.add(it1)
+                }
+
+                adapter.notifyDataSetChanged()
             }
-
-            adapter.notifyDataSetChanged()
         })
     }
 
     override fun onCLick(v: View, data: DatumOrders) {
-        val dataOrder = PaymentModel(data.orderID,
+        val dataOrder = PaymentModel(
+            data.orderID,
             data.productName,
             data.productImage,
             data.basePrice.toDouble(),
             data.productUnit,
             data.itemAmount.toString(),
+            0,
+            "-",
+            "-",
+            "-",
+            "-",
             data.orderCode,
-            data.orderStatus)
+            data.orderStatus
+        )
 
         val intent = Intent(requireContext(), PaymentActivity::class.java)
         intent.putExtra("paymentModel", dataOrder)

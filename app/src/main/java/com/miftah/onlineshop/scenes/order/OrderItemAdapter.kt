@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miftah.onlineshop.R
 import com.miftah.onlineshop.model.DatumOrders
-import com.miftah.onlineshop.model.OrderListModel
-import com.miftah.onlineshop.model.UserOrdersResponse
 import com.miftah.onlineshop.utilities.GenerateOrderStatus
 
 class OrderItemAdapter(private val orderList : List<DatumOrders>, private  val itemClickAdapterCallback: ItemAdapterCallback) : RecyclerView.Adapter<OrderItemAdapter.OrderViewHolder>() {

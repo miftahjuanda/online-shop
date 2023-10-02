@@ -23,7 +23,6 @@ class ListItemAdapter(private val homeList: ArrayList<DatumProduct>?, private va
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        println("response Bind: $homeList")
         if (homeList != null) {
             val currentItem = homeList[position]
             holder.titleHome.text = currentItem?.productName ?: ""

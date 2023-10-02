@@ -59,12 +59,11 @@ class ListItemsFragment : Fragment(), ListItemAdapter.ItemAdapterCallback {
                 listItem.add(it1)
             }
             adapter.notifyDataSetChanged()
-        } )
+        })
     }
 
     override fun onCLick(v: View, data: DatumProduct) {
         val direction = ListItemsFragmentDirections.actionNavigationHomeToDetailItemActivity(data)
         findNavController().navigate(direction)
     }
-
 }
